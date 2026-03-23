@@ -14,7 +14,7 @@ export interface ICompleteRegistrationRequest {
     vat_certificate: string,
     tga_license: string,
     cr_attachment: string,
-    logo:string
+    logo: string
     phone_country_code: string
     phone_number: string,
     bank_id: number,
@@ -24,10 +24,30 @@ export interface ICompleteRegistrationRequest {
 export async function completeRegistration(
     data: any
 ): Promise<ICompleteRegistrationResponse> {
+    const formData = new FormData();
 
-    const response = await apiClient.post('renter/profile', {
-        body: data,
-    }).json<ICompleteRegistrationResponse>();
+    formData.append('name', data.name ?? '');
+    formData.append('phone_number', data.phone_number ?? '');
+    formData.append('phone_country_code', data.phone_country_code ?? '');
+    formData.append('main_branch', data.main_branch ?? '');
+    formData.append('cr_number', data.cr_number ?? '');
+    formData.append('tga_number', data.tga_number ?? '');
+    formData.append('vat_number', data.vat_number ?? '');
+    formData.append('bank_id', data.bank_id ?? '');
+    formData.append('iban_number', data.iban_number ?? '');
+    formData.append('is_draft', '0');
 
-    return response;
+
+    if (data.logo?.[0]) formData.append('logo', data.logo[0]);
+    if (data.iban_letter?.[0]) formData.append('iban_letter', data.iban_letter[0]);
+    if (data.cr_attachment?.[0]) formData.append('cr_attachment', data.cr_attachment[0]);
+    if (data.tga_license?.[0]) formData.append('tga_license', data.tga_license[0]);
+    if (data.vat_certificate?.[0]) formData.append('vat_certificate', data.vat_certificate[0]);
+
+
+    formData.append('iban_letter_deleted', '0');
+    formData.append('cr_attachment_deleted', '0');
+    formData.append('tga_license_deleted', '0');
+
+    return apiClient.post('renter/profile', { body: formData }).json<ICompleteRegistrationResponse>();
 };

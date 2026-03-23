@@ -34,7 +34,7 @@ type CompleteRegistrationForm = {
     cr_number: string;
     tga_number: string;
     vat_number: string;
-    bank_id: string;
+    bank_id: number;
     iban_number: string;
     iban_letter: File[];
     logo: File[];
@@ -49,16 +49,16 @@ export default function CompleteRegistrationScreen() {
     const { data: banksData } = useBanksQuery();
     const profile = profileData?.data;
 
-        const methods = useForm<CompleteRegistrationForm>({
+    const methods = useForm<CompleteRegistrationForm>({
         defaultValues: {
             name: '', phone_number: '', phone_country_code: 'SA',
             main_branch: '', cr_number: '', tga_number: '', vat_number: '',
-            bank_id: '', iban_number: '', iban_letter: [],
+            bank_id: 0, iban_number: '', iban_letter: [],
             logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         },
     });
 
-  const { handleSubmit, setError, trigger } = methods;
+    const { handleSubmit, setError, trigger } = methods;
 
     const { mutateAsync: completeRegistration } = useCompleteRegistrationMutation({ setError });
 
@@ -76,7 +76,7 @@ export default function CompleteRegistrationScreen() {
             cr_number: profile.cr_number ?? '',
             tga_number: profile.tga_number ?? '',
             vat_number: profile.vat_number ?? '',
-            bank_id: profile.bank?.id ? String(profile.bank.id) : '',
+            bank_id: profile.bank?.id ? profile.bank.id : 0,
             iban_number: profile.iban_number ?? '',
             iban_letter: [], logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         });
@@ -97,7 +97,8 @@ export default function CompleteRegistrationScreen() {
     }
 
     const onSubmit = (data: CompleteRegistrationForm) => {
-   completeRegistration(data)
+        completeRegistration(data)
+
     };
 
     return (
@@ -220,29 +221,29 @@ export default function CompleteRegistrationScreen() {
                             open={openSection === 'docs'}
                             onToggle={() => toggle('docs')}
                         >
-                                <UploadController
-                                    name="logo"
-                                    label={t('auth.complete_registration.fields.logo')}
-                                    accept="image/jpeg,image/png"
-                                />
-                       
-                                <UploadController
-                                    name="cr_attachment"
-                                    label={t('auth.complete_registration.fields.cr_attachment')}
-                                    accept="application/pdf"
-                                />
-                         
-                                <UploadController
-                                    name="tga_license"
-                                    label={t('auth.complete_registration.fields.tga_license')}
-                                    accept="application/pdf"
-                                />
-                          
-                                <UploadController
-                                    name="vat_certificate"
-                                    label={t('auth.complete_registration.fields.vat_certificate')}
-                                    accept="application/pdf"
-                                />
+                            <UploadController
+                                name="logo"
+                                label={t('auth.complete_registration.fields.logo')}
+                                accept="image/jpeg,image/png"
+                            />
+
+                            <UploadController
+                                name="cr_attachment"
+                                label={t('auth.complete_registration.fields.cr_attachment')}
+                                accept="application/pdf"
+                            />
+
+                            <UploadController
+                                name="tga_license"
+                                label={t('auth.complete_registration.fields.tga_license')}
+                                accept="application/pdf"
+                            />
+
+                            <UploadController
+                                name="vat_certificate"
+                                label={t('auth.complete_registration.fields.vat_certificate')}
+                                accept="application/pdf"
+                            />
                         </CollapsibleSection>
 
                         <button

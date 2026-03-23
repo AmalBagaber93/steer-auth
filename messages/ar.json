@@ -6,7 +6,8 @@
     "file_upload_suffix_message": "للتحميل",
     "browse_files": "تصفح الملفات",
     "file_upload_error_message": "خطأ في رفع الملف",
-    "file_upload_description": "رفع {count, plural, =0 {ملفات} =1 {ملف واحد} other {أثنين إلى # ملفات}} بحد أقصى {max_size} (فقط {allowed_types} مسموح به)"
+    "file_upload_description": "رفع {count, plural, =0 {ملفات} =1 {ملف واحد} other {أثنين إلى # ملفات}} بحد أقصى {max_size} (فقط {allowed_types} مسموح به)",
+    "delete": "خذف"
   },
   "fields": {
     "email": "البريد الإلكتروني",
@@ -63,7 +64,6 @@
     "email_verification": {
       "title": "التحقق من البريد الإلكتروني",
       "subtitle": "يرجى إدخال بريدك الإلكتروني. "
-     
     }
   },
   "Auth": {

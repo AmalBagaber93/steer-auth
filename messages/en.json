@@ -6,7 +6,8 @@
     "file_upload_suffix_message": "to upload",
     "browse_files": "Browse files",
     "file_upload_error_message": "File upload error",
-    "file_upload_description": "Upload {count, plural, =0 {files} =1 {a file} other {up to # files}} with a maximum size of {max_size} (only {allowed_types} allowed)"
+    "file_upload_description": "Upload {count, plural, =0 {files} =1 {a file} other {up to # files}} with a maximum size of {max_size} (only {allowed_types} allowed)",
+    "delete": "delete"
   },
   "fields": {
     "email": "Email",
