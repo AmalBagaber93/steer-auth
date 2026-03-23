@@ -1,0 +1,174 @@
+{
+  "common": {
+    "next": "الخطوة التالية",
+    "back": "الرجوع",
+    "file_upload_prefix_message": "إسحب وأفلت الملفات هنا أو",
+    "file_upload_suffix_message": "للتحميل",
+    "browse_files": "تصفح الملفات",
+    "file_upload_error_message": "خطأ في رفع الملف",
+    "file_upload_description": "رفع {count, plural, =0 {ملفات} =1 {ملف واحد} other {أثنين إلى # ملفات}} بحد أقصى {max_size} (فقط {allowed_types} مسموح به)"
+  },
+  "fields": {
+    "email": "البريد الإلكتروني",
+    "email_placeholder": "you@example.com",
+    "password": "كلمة المرور",
+    "password_placeholder": "ادخل كلمة المرور"
+  },
+  "auth": {
+    "login": {
+      "title": "أهلاً بك",
+      "subtitle": "رحلتك، بطريقتك",
+      "forgot_password": "نسيت كلمة المرور؟",
+      "remember_me": "تذكرني",
+      "submit": "تسجيل الدخول",
+      "no_account": "ليس لديك حساب؟",
+      "sign_up": "أنشئ حساباً"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "انضم إلينا اليوم وابدأ رحلتك",
+      "already_have_account": "لديك حساب بالفعل؟",
+      "sign_in": "تسجيل الدخول"
+    },
+    "confirm_email": {
+      "title": "تحقق من بريدك الإلكتروني",
+      "message": "لقد أرسلنا بريداً إلكترونياً للتحقق إلى",
+      "spam_note": "لم تستلم البريد الإلكتروني؟ تحقق من مجلد الرسائل غير المرغوب فيها."
+    },
+    "complete_registration": {
+      "title": "أكمل تسجيلك",
+      "message": "تم إنشاء حسابك. يرجى رفع المستندات المتبقية لإتمام العملية.",
+      "completion": "اكتمال الملف الشخصي",
+      "fields_completed": "حقول مكتملة",
+      "entity_info": "معلومات الجهة",
+      "bank_info": "المعلومات البنكية",
+      "upload_title": "المستندات المطلوبة",
+      "submit": "إرسال المستندات",
+      "fields": {
+        "company_name": "اسم الشركة",
+        "main_branch": "الفرع الرئيسي",
+        "cr_number": "رقم السجل التجاري",
+        "phone": "رقم الهاتف",
+        "tga_number": "رقم هيئة النقل",
+        "vat_number": "الرقم الضريبي",
+        "bank": "البنك",
+        "iban": "رقم الآيبان",
+        "iban_letter": "خطاب الآيبان",
+        "logo": "شعار الشركة",
+        "cr_attachment": "مرفق السجل التجاري",
+        "tga_license": "رخصة هيئة النقل",
+        "vat_certificate": "شهادة ضريبة القيمة المضافة"
+      }
+    },
+    "email_verification": {
+      "title": "التحقق من البريد الإلكتروني",
+      "subtitle": "يرجى إدخال بريدك الإلكتروني. "
+     
+    }
+  },
+  "Auth": {
+    "personal_info": "المعلومات الشخصية",
+    "personal_info_desc": "يرجى تقديم بيانات الاتصال الشخصية الخاصة بك.",
+    "first_name": {
+      "label": "الاسم الأول",
+      "placeholder": "الاسم الأول"
+    },
+    "last_name": {
+      "label": "اسم العائلة",
+      "placeholder": "اسم العائلة"
+    },
+    "email": {
+      "label": "البريد الإلكتروني",
+      "placeholder": "mohammed@example.com"
+    },
+    "phone_number": {
+      "label": "رقم الهاتف",
+      "placeholder": "55555555"
+    },
+    "company_info": "معلومات الشركة",
+    "company_info_desc": "أدخل معلومات السجل التجاري لشركتك.",
+    "company_name": {
+      "label": "اسم الشركة",
+      "placeholder": "شركتي"
+    },
+    "main_branch": {
+      "label": "الفرع الرئيسي",
+      "placeholder": "الرياض"
+    },
+    "cr_number": {
+      "label": "رقم السجل التجاري",
+      "placeholder": "1010..."
+    },
+    "tga_number": {
+      "label": "رقم هيئة النقل",
+      "len": "رقم هيئة النقل يجب أن يحتوي على 10 رقم",
+      "placeholder": "1234..."
+    },
+    "vat_number": {
+      "label": "الرقم الضريبي",
+      "placeholder": "3000..."
+    },
+    "bank_info": "المعلومات البنكية",
+    "security_info": " المعلومات الامنية",
+    "bank_info_desc": "إعداد معلومات الحساب البنكي الخاص بك.",
+    "bank_name": {
+      "label": "اسم البنك",
+      "placeholder": "اختر اسم البنك",
+      "required": "اسم البنك مطلوب"
+    },
+    "iban_number": {
+      "label": "رقم الآيبان",
+      "placeholder": "CA...",
+      "matches": " "
+    },
+    "iban_letter": {
+      "label": "خطاب الآيبان (رفع ملف)",
+      "required": " خطاب الآيبان مطلوب"
+    },
+    "security": "الأمان",
+    "security_desc": "قم بحماية حسابك بكلمة مرور قوية.",
+    "password": {
+      "label": "كلمة المرور",
+      "min": "كلمة المرور يجب أن تكون على الأقل 8 أحرف",
+      "matches": "كلمة المرور يجب أن تحتوي على حرف كبير وصغير ورقم",
+      "required": "كلمة المرور مطلوبة",
+      "placeholder": "********"
+    },
+    "password_confirmation": {
+      "label": "تأكيد كلمة المرور",
+      "placeholder": "********",
+      "min": "كلمة المرور يجب أن تكون على الأقل 8 أحرف",
+      "matches": "كلمة المرور وتأكيد كلمة المرور غير متطابقين"
+    },
+    "terms_and_conditions": {
+      "label": "أوافق على الشروط والأحكام",
+      "required": "يجب الموافقة على الشروط والأحكام"
+    },
+    "register_submit": "إنشاء حساب"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً بك، {name}",
+    "logout": "تسجيل الخروج",
+    "stats": {
+      "total_users": "إجمالي المستخدمين",
+      "active_sessions": "الجلسات النشطة",
+      "revenue": "الإيرادات"
+    }
+  },
+  "validation": {
+    "errors": {
+      "invalid_email_format": "تنسيق البريد الإلكتروني غير صالح",
+      "password_required": "كلمة المرور مطلوبة",
+      "password_confirmation_required": "تأكيد كلمة المرور مطلوبة",
+      "passwords_mismatch": "كلمة المرور وتأكيد كلمة المرور غير متطابقين",
+      "file_allowed_types": "يجب أن يكون الملف من نوع {file_type}"
+    },
+    "register_success": "تم تسجيل الحساب بنجاح",
+    "complete_registration_success": "تم تحديث البيانات بنجاح"
+  },
+  "responses": {
+    "login_success": "تم تسجيل الدخول بنجاح",
+    "email_verification_sent": "تم إرسال بريد التحقق بنجاح"
+  }
+}

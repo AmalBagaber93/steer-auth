@@ -1,0 +1,187 @@
+{
+  "common": {
+    "next": "Next Step",
+    "back": "Go Back",
+    "file_upload_prefix_message": "Drag and drop files here or",
+    "file_upload_suffix_message": "to upload",
+    "browse_files": "Browse files",
+    "file_upload_error_message": "File upload error",
+    "file_upload_description": "Upload {count, plural, =0 {files} =1 {a file} other {up to # files}} with a maximum size of {max_size} (only {allowed_types} allowed)"
+  },
+  "fields": {
+    "email": "Email",
+    "email_placeholder": "you@example.com",
+    "password": "Password",
+    "password_placeholder": "Enter your password"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Your Journey, Your Way",
+      "forgot_password": "Forgot Password?",
+      "remember_me": "Remember me",
+      "submit": "Sign In",
+      "no_account": "Don't have an account?",
+      "sign_up": "Sign up"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join us today and start your journey",
+      "already_have_account": "Already have an account?",
+      "sign_in": "Sign in"
+    },
+    "confirm_email": {
+      "title": "Check your email",
+      "message": "We sent a verification email to",
+      "spam_note": "Didn't receive the email? Check your spam folder."
+    },
+    "complete_registration": {
+      "title": "Complete your registration",
+      "message": "Your account has been created. Please upload the remaining documents to complete the process.",
+      "completion": "Profile completion",
+      "fields_completed": "fields completed",
+      "entity_info": "Entity Information",
+      "bank_info": "Bank Information",
+      "upload_title": "Required documents",
+      "submit": "Submit documents",
+      "fields": {
+        "company_name": "Company name",
+        "main_branch": "Main branch",
+        "cr_number": "CR number",
+        "phone": "Phone number",
+        "tga_number": "TGA number",
+        "vat_number": "VAT number",
+        "bank": "Bank",
+        "iban": "IBAN number",
+        "iban_letter": "IBAN letter",
+        "logo": "Company logo",
+        "cr_attachment": "CR attachment",
+        "tga_license": "TGA license",
+        "vat_certificate": "VAT certificate"
+      }
+    },
+    "email_verification": {
+      "title": "Email Verification",
+      "subtitle": "Your account is not verified.Please enter your email to receive the verification link",
+      "submit": "Verify Email",
+      "back_to_login": "Back to Login"
+    }
+  },
+  "Auth": {
+    "personal_info": "Personal Information",
+    "personal_info_desc": "Please provide your personal contact details.",
+    "first_name": {
+      "label": "First Name",
+      "placeholder": "First Name",
+      "required": " First name is required"
+    },
+    "last_name": {
+      "label": "Last Name",
+      "placeholder": "Last Name",
+      "required": " last name is required"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "john@example.com",
+      "required": " Email is required"
+    },
+    "phone_number": {
+      "label": "Phone Number",
+      "placeholder": "55555555",
+      "required": " Phone Number is required",
+      "len": "Phone number must be 10 digits"
+    },
+    "company_info": "Company Information",
+    "company_info_desc": "Enter your business registration information.",
+    "company_name": {
+      "label": "Company Name",
+      "placeholder": "Your Company Name",
+      "required": " Company Name is required"
+    },
+    "main_branch": {
+      "label": "Main Branch",
+      "placeholder": "Riyadh",
+      "required": " Main Branch is required"
+    },
+    "cr_number": {
+      "label": "CR Number",
+      "placeholder": "1010...",
+      "len": "CR Number must be 10 digits"
+    },
+    "tga_number": {
+      "label": "TGA Number",
+      "len": "TGA Number must be 10 digits",
+      "placeholder": "1234..."
+    },
+    "vat_number": {
+      "label": "VAT Number",
+      "placeholder": "3000...",
+      "len": "VAT Number must be 15 digits"
+    },
+    "bank_info": "Bank Information",
+    "security_info": "Security Information",
+    "bank_info_desc": "Setup your payout bank account information.",
+    "bank_name": {
+      "label": "Bank Name",
+      "placeholder": "Select Bank Name",
+      "required": " Bank Name is required"
+    },
+    "iban_number": {
+      "label": "IBAN Number",
+      "placeholder": "SA...",
+      "matches": "Wrong IBAN number entered"
+    },
+    "iban_letter": {
+      "label": "IBAN Letter (Upload)",
+      "required": " IBAN Letter is required"
+    },
+    "security": "Security",
+    "security_desc": "Protect your account with a strong password.",
+    "password": {
+      "label": "Password",
+      "min": "Password must be at least 8 characters",
+      "matches": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      "required": "Password is required",
+      "placeholder": "********"
+    },
+    "password_confirmation": {
+      "label": "Confirm Password",
+      "placeholder": "********",
+      "min": "Password must be at least 8 characters",
+      "matches": "Password and confirm password do not match"
+    },
+    "terms_and_conditions": {
+      "label": "I agree to the Terms and Conditions",
+      "required": "Terms and Conditions is required"
+    },
+    "register_submit": "Create Account",
+    "next": "Next Step",
+    "back": "Go Back"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back, {name}",
+    "logout": "Logout",
+    "stats": {
+      "total_users": "Total Users",
+      "active_sessions": "Active Sessions",
+      "revenue": "Revenue"
+    }
+  },
+  "validation": {
+    "errors": {
+      "invalid_email_format": "Invalid email format",
+      "file_size_too_large": "File size cannot exceed {file_size}",
+      "file_allowed_types": "File must be of type {file_type}",
+      "password_required": "Password is required",
+      "password_confirmation_required": "Confirm password is required",
+      "passwords_mismatch": "Password and confirm password do not match"
+    },
+    "register_success": "Account created successfully",
+    "complete_registration_success": "Profile completed successfully"
+  },
+  "responses": {
+    "login_success": "Login successful",
+    "email_verification_sent": "Email verification sent successfully"
+  }
+}
