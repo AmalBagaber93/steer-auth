@@ -1,5 +1,5 @@
-import { getUserServer } from '@/src/api/auth/server/get-user';
-import { redirect } from 'next/navigation';
+import { getUserServer } from "@/src/api/auth/server/get-user";
+import { redirect } from "next/navigation";
 
 export default async function Layout({
   children,
@@ -14,6 +14,10 @@ export default async function Layout({
 
   if (!userDetailsResponse?.data) {
     redirect(`/${locale}/auth/login`);
+  }
+
+  if (userDetailsResponse?.data.step === "dashboard") {
+    redirect(`/${locale}/dashboard`);
   }
 
   return <>{children}</>;

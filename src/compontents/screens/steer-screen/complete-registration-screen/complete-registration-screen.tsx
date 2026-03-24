@@ -34,7 +34,7 @@ type CompleteRegistrationForm = {
     cr_number: string;
     tga_number: string;
     vat_number: string;
-    bank_id: number;
+    bank_id: string;
     iban_number: string;
     iban_letter: File[];
     logo: File[];
@@ -45,15 +45,16 @@ type CompleteRegistrationForm = {
 
 export default function CompleteRegistrationScreen() {
     const t = useTranslations();
-    const { data: profileData, isLoading } = useProfileQuery();
-    const { data: banksData } = useBanksQuery();
+    const { data: profileData, isLoading: isProfileLoading } = useProfileQuery();
+    const { data: banksData, isLoading: isBanksLoading } = useBanksQuery();
+    const isLoading = isProfileLoading || isBanksLoading;
     const profile = profileData?.data;
 
     const methods = useForm<CompleteRegistrationForm>({
         defaultValues: {
             name: '', phone_number: '', phone_country_code: 'SA',
             main_branch: '', cr_number: '', tga_number: '', vat_number: '',
-            bank_id: 0, iban_number: '', iban_letter: [],
+            bank_id: '', iban_number: '', iban_letter: [],
             logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         },
     });
@@ -76,11 +77,11 @@ export default function CompleteRegistrationScreen() {
             cr_number: profile.cr_number ?? '',
             tga_number: profile.tga_number ?? '',
             vat_number: profile.vat_number ?? '',
-            bank_id: profile.bank?.id ? profile.bank.id : 0,
+            bank_id: profile.bank?.id ? String(profile.bank.id) : '',
             iban_number: profile.iban_number ?? '',
             iban_letter: [], logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         });
-    }, [profile]);
+    }, [profile, banksData]);
 
     const banks = banksData?.data.map((b) => ({ value: String(b.id), label: b.name })) ?? [];
     const completion = profile ? calcCompletion(profile) : { filled: 0, total: 13, percentage: 0 };
@@ -203,15 +204,15 @@ export default function CompleteRegistrationScreen() {
                                 label={t('auth.complete_registration.fields.iban')}
                                 placeholder="SA..."
                             />
-                            {!profile?.iban_letter && (
-                                <div className="sm:col-span-2">
-                                    <UploadController
-                                        name="iban_letter"
-                                        label={t('auth.complete_registration.fields.iban_letter')}
-                                        accept="application/pdf"
-                                    />
-                                </div>
-                            )}
+
+                            <div className="sm:col-span-2">
+                                <UploadController
+                                    name="iban_letter"
+                                    label={t('auth.complete_registration.fields.iban_letter')}
+                                    accept="application/pdf"
+                                />
+                            </div>
+
                         </CollapsibleSection>
 
                         {/* Required Documents */}
@@ -248,7 +249,7 @@ export default function CompleteRegistrationScreen() {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#06b6f4] text-white font-semibold h-11 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center mt-2"
+                            className="w-full bg-[#06b6f4] text-white font-semibold h-11 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center mt-2 cursor-pointer"
                         >
                             {t('auth.complete_registration.submit')}
                         </button>

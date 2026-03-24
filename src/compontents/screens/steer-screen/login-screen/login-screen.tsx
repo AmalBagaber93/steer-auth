@@ -8,13 +8,12 @@ import { loginDefaultValues } from "./schema/login-default-values";
 import { InputController } from "@/src/compontents/common/controllers/input-controller";
 import { PasswordFieldController } from "@/src/compontents/common/controllers/password-field-controller";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useUserQuery } from "@/src/api/auth/hooks/queries/use-user.query";
 
 const LoginScreen = () => {
     const t = useTranslations();
-
+    const locale = useLocale();
 
     const methods = useForm<LoginFormData>({
         resolver: zodResolver(loginFormSchema(t)),
@@ -66,7 +65,7 @@ const LoginScreen = () => {
                             />
                             <div className='flex justify-end'>
                                 <Link
-                                    href='/forgot-password'
+                                    href={`/${locale}/auth/forgot-password`}
                                     className='text-xs font-medium text-[#06b6f4] hover:text-blue-700 hover:underline'
                                 >
                                     {t('auth.login.forgot_password')}

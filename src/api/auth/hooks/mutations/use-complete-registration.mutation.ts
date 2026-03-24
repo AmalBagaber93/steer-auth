@@ -16,7 +16,8 @@ export const useCompleteRegistrationMutation = ({ setError }: UseCompleteRegistr
   return useMutation({
     onSuccess: async () => {
       toast.success(t('validation.complete_registration_success'));
-      router.refresh()
+      router.push('/dashboard');
+      // router.refresh()
     },
     onError: (error: any) => {
       const data = JSON.parse(error.message);

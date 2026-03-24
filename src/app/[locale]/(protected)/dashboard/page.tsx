@@ -1,5 +1,5 @@
 'use client';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import useAuthState from '@/store/auth/useAuthState';
 import { useRouter } from 'next/navigation';
 
@@ -7,10 +7,11 @@ export default function DashboardPage() {
     const t = useTranslations('dashboard');
     const { data: user, logout } = useAuthState();
     const router = useRouter();
+    const locale = useLocale();
 
     const handleLogout = () => {
         logout();
-        router.push('/login');
+        router.push(`/${locale}/auth/login`);
     };
 
     return (
