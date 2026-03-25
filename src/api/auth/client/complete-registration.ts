@@ -1,5 +1,5 @@
 
-import { IOptionType, IPhone, IRole } from "@/src/@types/common";
+import { IRole } from "@/src/@types/common";
 import { apiClient } from "@/src/utils/fetch/api-client";
 
 export interface ICompleteRegistrationResponse {

@@ -20,14 +20,9 @@ export function useLoginMutation(
       const { token, step, company_id, roles } = response.data;
       authLogin(token, step, company_id, roles);
 
-      toast.success(t('login_success'));
-      // if (response.step === 'complete_registration') {
-      //   router.push('/complete-registration')
-      // }
+      toast.success(t('login_success'))
 
       router.push('/dashboard');
-
-
     },
     onError: async (error: any) => {
       const data = JSON.parse(error.message);
