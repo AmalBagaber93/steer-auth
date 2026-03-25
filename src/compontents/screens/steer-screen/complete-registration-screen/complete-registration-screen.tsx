@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useProfileQuery } from '@/src/api/renter/hooks/queries/use-profile.query';
 import { useBanksQuery } from '@/src/api/common/hooks/queries/use-banks.query';
 import { InputController } from '@/src/compontents/common/controllers/input-controller';
@@ -14,6 +15,12 @@ import { Loader2, Building2, Landmark, FileText } from 'lucide-react';
 import { IProfile } from '@/src/api/renter/client/get-profile';
 import CollapsibleSection from '@/src/compontents/ui/collapsible-section';
 import { useCompleteRegistrationMutation } from '@/src/api/auth/hooks/mutations/use-complete-registration.mutation';
+import {
+    CompleteRegistrationSchema,
+    CompleteRegistrationFormValues,
+} from './complete-registration-schema';
+
+type OpenSection = 'entity' | 'bank' | 'docs' | null;
 
 function calcCompletion(p: IProfile) {
     const fields: (string | null | undefined | object)[] = [
@@ -25,24 +32,6 @@ function calcCompletion(p: IProfile) {
     return { filled, total: fields.length, percentage: Math.round((filled / fields.length) * 100) };
 }
 
-
-type CompleteRegistrationForm = {
-    name: string;
-    phone_number: string;
-    phone_country_code: string;
-    main_branch: string;
-    cr_number: string;
-    tga_number: string;
-    vat_number: string;
-    bank_id: string;
-    iban_number: string;
-    iban_letter: File[];
-    logo: File[];
-    cr_attachment: File[];
-    tga_license: File[];
-    vat_certificate: File[];
-};
-
 export default function CompleteRegistrationScreen() {
     const t = useTranslations();
     const { data: profileData, isLoading: isProfileLoading } = useProfileQuery();
@@ -50,7 +39,8 @@ export default function CompleteRegistrationScreen() {
     const isLoading = isProfileLoading || isBanksLoading;
     const profile = profileData?.data;
 
-    const methods = useForm<CompleteRegistrationForm>({
+    const methods = useForm<CompleteRegistrationFormValues>({
+        resolver: zodResolver(CompleteRegistrationSchema),
         defaultValues: {
             name: '', phone_number: '', phone_country_code: 'SA',
             main_branch: '', cr_number: '', tga_number: '', vat_number: '',
@@ -59,13 +49,11 @@ export default function CompleteRegistrationScreen() {
         },
     });
 
-    const { handleSubmit, setError, trigger } = methods;
+    const { handleSubmit, setError } = methods;
 
-    const { mutateAsync: completeRegistration } = useCompleteRegistrationMutation({ setError });
+    const { mutate: submitRegistration, isPending } = useCompleteRegistrationMutation({ setError });
 
-    const [openSection, setOpenSection] = useState<'entity' | 'bank' | 'docs'>('entity');
-
-
+    const [openSection, setOpenSection] = useState<OpenSection>('entity');
 
     useEffect(() => {
         if (!profile) return;
@@ -86,8 +74,8 @@ export default function CompleteRegistrationScreen() {
     const banks = banksData?.data.map((b) => ({ value: String(b.id), label: b.name })) ?? [];
     const completion = profile ? calcCompletion(profile) : { filled: 0, total: 13, percentage: 0 };
 
-    const toggle = (s: 'entity' | 'bank' | 'docs') =>
-        setOpenSection((prev) => (prev === s ? ('' as any) : s));
+    const toggle = (s: Exclude<OpenSection, null>) =>
+        setOpenSection((prev) => (prev === s ? null : s));
 
     if (isLoading) {
         return (
@@ -97,9 +85,8 @@ export default function CompleteRegistrationScreen() {
         );
     }
 
-    const onSubmit = (data: CompleteRegistrationForm) => {
-        completeRegistration(data)
-
+    const onSubmit = (data: CompleteRegistrationFormValues) => {
+        submitRegistration(data);
     };
 
     return (
@@ -141,7 +128,7 @@ export default function CompleteRegistrationScreen() {
                 </div>
 
                 <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-3">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
 
                         {/* Entity Information */}
                         <CollapsibleSection
@@ -249,9 +236,14 @@ export default function CompleteRegistrationScreen() {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#06b6f4] text-white font-semibold h-11 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center mt-2 cursor-pointer"
+                            disabled={isPending}
+                            className="w-full bg-[#06b6f4] text-white font-semibold h-11 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center mt-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            {t('auth.complete_registration.submit')}
+                            {isPending ? (
+                                <Loader2 className="h-5 w-5 animate-spin" />
+                            ) : (
+                                t('auth.complete_registration.submit')
+                            )}
                         </button>
                     </form>
                 </FormProvider>

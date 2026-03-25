@@ -17,12 +17,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/src/utils/utils";
 import { useBanksQuery } from "@/src/api/common/hooks/queries/use-banks.query";
-import PersonalInfo from "./steps/personal-info ";
-import CompanyInfo from "./steps/company-info ";
-import BankInfo from "./steps/bank-info";
-import Security from "./steps/security-info";
-import StepProgress from "./steps/step-progress";
-import { STEPS } from "./steps/steps-data";
+import PersonalInfo from "./register-steps/personal-info ";
+import CompanyInfo from "./register-steps/company-info ";
+import BankInfo from "./register-steps/bank-info";
+import Security from "./register-steps/security-info";
+import StepProgress from "./register-steps/step-progress";
+import { STEPS } from "./register-steps/steps-data";
 
 
 
@@ -123,7 +123,7 @@ export const RegisterForm = () => {
             <button
               type="button"
               onClick={nextStep}
-              className="bg-[#06b6f4] text-white sm:px-8 px-2 h-11 sm:text-xl text-baseh-11 rounded-lg font-semibold hover:bg-[#05a5dc] transition-all flex items-center justify-center gap-2 min-w-35 shadow-lg shadow-blue-200 cursor-pointer"
+              className="bg-[#06b6f4] text-white sm:px-8 px-2 h-11 sm:text-xl text-base rounded-lg font-semibold hover:bg-[#05a5dc] transition-all flex items-center justify-center gap-2 min-w-35 shadow-lg shadow-blue-200 cursor-pointer"
             >
               {t("next")}
               <ChevronRight size={20} />

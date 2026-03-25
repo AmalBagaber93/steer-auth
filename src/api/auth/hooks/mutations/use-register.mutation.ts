@@ -24,7 +24,7 @@ export const useRegisterMutation = ({ setError }: UseRegisterMutationProps) => {
       if (step === 'complete_registration') {
         router.push(`/${locale}/complete-registration`);
       } else {
-        router.push(`/${locale}/confirm-email?email=${encodeURIComponent(variables.email ?? '')}`);
+        router.push(`/${locale}/auth/confirm-email?email=${encodeURIComponent(variables.email ?? '')}`);
       }
     },
     onError: (error: any) => {

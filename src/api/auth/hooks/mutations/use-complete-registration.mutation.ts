@@ -1,22 +1,27 @@
 import { setFormErrors } from "@/src/hooks/use-response-error";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { UseFormSetError } from "react-hook-form";
+import { FieldValues, UseFormSetError } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { completeRegistration } from "../../client/complete-registration";
 
-export const useCompleteRegistrationMutation = (
-  setError: UseFormSetError<any>,
-) => {
+type UseCompleteRegistrationMutationProps<T extends FieldValues = any> = {
+  setError: UseFormSetError<T>;
+};
+
+export const useCompleteRegistrationMutation = <T extends FieldValues = any>({
+  setError,
+}: UseCompleteRegistrationMutationProps<T>) => {
   const t = useTranslations();
   const router = useRouter();
+  const params = useParams();
+  const locale = (params?.locale as string) ?? 'en';
 
   return useMutation({
-    onSuccess: async () => {
+    onSuccess: () => {
       toast.success(t('validation.complete_registration_success'));
-      router.push('/dashboard');
-      // router.refresh()
+      router.push(`/${locale}/dashboard`);
     },
     onError: (error: any) => {
       const data = JSON.parse(error.message);

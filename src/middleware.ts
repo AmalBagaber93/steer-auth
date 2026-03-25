@@ -12,6 +12,8 @@ export default async function middleware(request: NextRequest) {
     request.headers.set('accept-language', '');
     const response = handleRouting(request);
 
+    response.headers.set('x-pathname', request.nextUrl.pathname);
+
     return response;
 }
 

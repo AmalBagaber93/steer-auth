@@ -20,7 +20,11 @@ export default async function Layout({
   const userDetailsResponse = await getUserServer();
   const userDetailsData = userDetailsResponse?.data;
 
+
   if (!userDetailsData) {
+    if (pathname.includes('confirm-email')) {
+      return <>{children}</>;
+    }
     redirect(`/${locale}/auth/login`);
   }
 

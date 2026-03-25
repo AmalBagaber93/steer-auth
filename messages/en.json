@@ -128,16 +128,19 @@
     "cr_number": {
       "label": "CR Number",
       "placeholder": "1010...",
-      "len": "CR Number must be 10 digits"
+      "len": "CR Number must be 10 digits",
+      "required": "CR Number is required"
     },
     "tga_number": {
       "label": "TGA Number",
       "len": "TGA Number must be 10 digits",
+      "required": "TGA Number is required",
       "placeholder": "1234..."
     },
     "vat_number": {
       "label": "VAT Number",
       "placeholder": "3000...",
+      "required": "VAT Number is required",
       "len": "VAT Number must be 15 digits"
     },
     "bank_info": "Bank Information",
@@ -170,7 +173,8 @@
       "label": "Confirm Password",
       "placeholder": "********",
       "min": "Password must be at least 8 characters",
-      "matches": "Password and confirm password do not match"
+      "matches": "Password and confirm password do not match",
+      "required": "Confirm password is required"
     },
     "terms_and_conditions": {
       "label": "I agree to the Terms and Conditions",
