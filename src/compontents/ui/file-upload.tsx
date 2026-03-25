@@ -44,16 +44,16 @@ function getFileIcon(file: File) {
   const type = file.type;
   const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
 
-  if (type.startsWith('video/')) {
+  if (type?.startsWith('video/')) {
     return <FileVideoIcon />;
   }
 
-  if (type.startsWith('audio/')) {
+  if (type?.startsWith('audio/')) {
     return <FileAudioIcon />;
   }
 
   if (
-    type.startsWith('text/') ||
+    type?.startsWith('text/') ||
     ['txt', 'md', 'rtf', 'pdf'].includes(extension)
   ) {
     return <FileTextIcon />;
@@ -87,7 +87,7 @@ function getFileIcon(file: File) {
 
   if (
     ['exe', 'msi', 'app', 'apk', 'deb', 'rpm'].includes(extension) ||
-    type.startsWith('application/')
+    type?.startsWith('application/')
   ) {
     return <FileCogIcon />;
   }
@@ -1076,7 +1076,7 @@ function FileUploadItemPreview(props: FileUploadItemPreviewProps) {
 
   const getDefaultRender = React.useCallback(
     (file: File) => {
-      if (itemContext.fileState?.file.type.startsWith('image/')) {
+      if (itemContext.fileState?.file?.type?.startsWith('image/')) {
         let url = context.urlCache.get(file);
         if (!url) {
           url = URL.createObjectURL(file);

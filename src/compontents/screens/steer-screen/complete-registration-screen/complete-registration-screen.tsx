@@ -7,20 +7,18 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useProfileQuery } from '@/src/api/renter/hooks/queries/use-profile.query';
 import { useBanksQuery } from '@/src/api/common/hooks/queries/use-banks.query';
-import { InputController } from '@/src/compontents/common/controllers/input-controller';
-import { PhoneFieldController } from '@/src/compontents/common/controllers/phone-field-controller';
-import { SelectController } from '@/src/compontents/common/controllers/select-controller';
-import { UploadController } from '@/src/compontents/common/controllers/upload-controller';
-import { Loader2, Building2, Landmark, FileText } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { IProfile } from '@/src/api/renter/client/get-profile';
-import CollapsibleSection from '@/src/compontents/ui/collapsible-section';
 import { useCompleteRegistrationMutation } from '@/src/api/auth/hooks/mutations/use-complete-registration.mutation';
 import {
     CompleteRegistrationSchema,
     CompleteRegistrationFormValues,
 } from './complete-registration-schema';
+import BankInfo from './compontents/bank-info';
+import Documents from './compontents/documents';
+import EntityInfo from './compontents/entity-info';
 
-type OpenSection = 'entity' | 'bank' | 'docs' | null;
+export type OpenSection = 'entity' | 'bank' | 'docs' | null;
 
 function calcCompletion(p: IProfile) {
     const fields: (string | null | undefined | object)[] = [
@@ -67,11 +65,10 @@ export default function CompleteRegistrationScreen() {
             vat_number: profile.vat_number ?? '',
             bank_id: profile.bank?.id ? String(profile.bank.id) : '',
             iban_number: profile.iban_number ?? '',
-            iban_letter: [], logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
+            iban_letter: profile.iban_letter ? [profile.iban_letter] : [], logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         });
     }, [profile, banksData]);
 
-    const banks = banksData?.data.map((b) => ({ value: String(b.id), label: b.name })) ?? [];
     const completion = profile ? calcCompletion(profile) : { filled: 0, total: 13, percentage: 0 };
 
     const toggle = (s: Exclude<OpenSection, null>) =>
@@ -93,7 +90,6 @@ export default function CompleteRegistrationScreen() {
         <div className="min-h-screen w-full flex items-center justify-center p-4 bg-slate-50">
             <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-100 p-8">
 
-                {/* Header */}
                 <div className="flex flex-col items-center mb-8">
                     <div className="mb-6">
                         <Image src="https://gosteer.sa/colored_logo.svg" alt="Steer Logo" width={120} height={40} className="h-10 w-auto" priority />
@@ -130,109 +126,13 @@ export default function CompleteRegistrationScreen() {
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
 
-                        {/* Entity Information */}
-                        <CollapsibleSection
-                            icon={<Building2 className="w-5 h-5 text-[#06b6f4]" />}
-                            title={t('auth.complete_registration.entity_info')}
-                            open={openSection === 'entity'}
-                            onToggle={() => toggle('entity')}
-                        >
-                            <InputController
-                                name="name"
-                                label={t('auth.complete_registration.fields.company_name')}
-                                placeholder={t('auth.complete_registration.fields.company_name')}
-                            />
-                            <InputController
-                                name="main_branch"
-                                label={t('auth.complete_registration.fields.main_branch')}
-                                placeholder={t('auth.complete_registration.fields.main_branch')}
-                            />
-                            <div className="sm:col-span-2">
-                                <PhoneFieldController
-                                    phoneNumberName="phone_number"
-                                    countryCodeName="phone_country_code"
-                                    label={t('auth.complete_registration.fields.phone')}
-                                    placeholder="5xxxxxxxx"
-                                />
-                            </div>
-                            <InputController
-                                name="cr_number"
-                                label={t('auth.complete_registration.fields.cr_number')}
-                                placeholder="1010..."
-                            />
-                            <InputController
-                                name="tga_number"
-                                label={t('auth.complete_registration.fields.tga_number')}
-                                placeholder="1234..."
-                                optional
-                            />
-                            <InputController
-                                name="vat_number"
-                                label={t('auth.complete_registration.fields.vat_number')}
-                                placeholder="3000..."
-                            />
-                        </CollapsibleSection>
 
-                        {/* Bank Information */}
-                        <CollapsibleSection
-                            icon={<Landmark className="w-5 h-5 text-[#06b6f4]" />}
-                            title={t('auth.complete_registration.bank_info')}
-                            open={openSection === 'bank'}
-                            onToggle={() => toggle('bank')}
-                        >
-                            <SelectController
-                                name="bank_id"
-                                label={t('auth.complete_registration.fields.bank')}
-                                placeholder={t('auth.complete_registration.fields.bank')}
-                                options={banks}
-                            />
-                            <InputController
-                                name="iban_number"
-                                label={t('auth.complete_registration.fields.iban')}
-                                placeholder="SA..."
-                            />
+                        <EntityInfo openSection={openSection} toggle={toggle} />
 
-                            <div className="sm:col-span-2">
-                                <UploadController
-                                    name="iban_letter"
-                                    label={t('auth.complete_registration.fields.iban_letter')}
-                                    accept="application/pdf"
-                                />
-                            </div>
+                        <BankInfo banksData={banksData?.data} openSection={openSection} toggle={toggle} />
 
-                        </CollapsibleSection>
 
-                        {/* Required Documents */}
-                        <CollapsibleSection
-                            icon={<FileText className="w-5 h-5 text-[#06b6f4]" />}
-                            title={t('auth.complete_registration.upload_title')}
-                            open={openSection === 'docs'}
-                            onToggle={() => toggle('docs')}
-                        >
-                            <UploadController
-                                name="logo"
-                                label={t('auth.complete_registration.fields.logo')}
-                                accept="image/jpeg,image/png"
-                            />
-
-                            <UploadController
-                                name="cr_attachment"
-                                label={t('auth.complete_registration.fields.cr_attachment')}
-                                accept="application/pdf"
-                            />
-
-                            <UploadController
-                                name="tga_license"
-                                label={t('auth.complete_registration.fields.tga_license')}
-                                accept="application/pdf"
-                            />
-
-                            <UploadController
-                                name="vat_certificate"
-                                label={t('auth.complete_registration.fields.vat_certificate')}
-                                accept="application/pdf"
-                            />
-                        </CollapsibleSection>
+                        <Documents openSection={openSection} toggle={toggle} />
 
                         <button
                             type="submit"
