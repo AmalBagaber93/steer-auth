@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/src/utils/i18n/routing";
 import { Toaster } from "sonner";
 import { dir } from "@/src/utils/i18n/i18n";
-import { QueryProvider } from "@/src/compontents/providers/query-provider";
+import { QueryProvider } from "@/src/compontents/common/layout/providers/query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

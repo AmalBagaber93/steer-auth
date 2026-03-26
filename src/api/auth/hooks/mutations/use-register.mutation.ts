@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { register } from "../../client/register";
 import { FieldValues, UseFormSetError } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "@/src/utils/i18n/routing";
 
 type UseRegisterMutationProps<T extends FieldValues = any> = {
   setError: UseFormSetError<T>;
@@ -13,8 +13,6 @@ type UseRegisterMutationProps<T extends FieldValues = any> = {
 export const useRegisterMutation = ({ setError }: UseRegisterMutationProps) => {
   const t = useTranslations();
   const router = useRouter();
-  const params = useParams();
-  const locale = (params?.locale as string) ?? 'en';
   const authRegister = useAuthState((state) => state.register);
 
   return useMutation({
@@ -22,9 +20,9 @@ export const useRegisterMutation = ({ setError }: UseRegisterMutationProps) => {
       toast.success(t('validation.register_success'));
       authRegister(token, step, company_id, roles);
       if (step === 'complete_registration') {
-        router.push(`/${locale}/complete-registration`);
+        router.push('/complete-registration');
       } else {
-        router.push(`/${locale}/auth/confirm-email?email=${encodeURIComponent(variables.email ?? '')}`);
+        router.push(`/auth/confirm-email?email=${encodeURIComponent(variables.email ?? '')}`);
       }
     },
     onError: (error: any) => {

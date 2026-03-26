@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl';
 import { RegisterForm } from './compontents/register-form';
-import Link from 'next/link';
+import { Link } from '@/src/utils/i18n/routing';
 
 export default function RegisterScreen() {
     const t = useTranslations();
@@ -32,7 +32,7 @@ export default function RegisterScreen() {
                 <div className='mt-4 text-center pt-6 border-t border-slate-100'>
                     <p className='text-sm text-slate-500'>
                         {t('auth.register.already_have_account')}{' '}
-                        <Link href='/en/auth/login' className='font-semibold text-blue-600 hover:text-blue-700 hover:underline'>
+                        <Link href='/auth/login' className='font-semibold text-blue-600 hover:text-blue-700 hover:underline'>
                             {t('auth.register.sign_in')}
                         </Link>
                     </p>

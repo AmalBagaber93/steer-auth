@@ -7,14 +7,12 @@ import { useLoginMutation } from "@/src/api/auth/hooks/mutations/use-login.mutat
 import { loginDefaultValues } from "./schema/login-default-values";
 import { InputController } from "@/src/compontents/common/controllers/input-controller";
 import { PasswordFieldController } from "@/src/compontents/common/controllers/password-field-controller";
-import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/src/utils/i18n/routing";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const LoginScreen = () => {
     const t = useTranslations();
-    const locale = useLocale();
-
     const methods = useForm<LoginFormData>({
         resolver: zodResolver(loginFormSchema(t)),
         defaultValues: loginDefaultValues,
@@ -65,7 +63,7 @@ const LoginScreen = () => {
                             />
                             <div className='flex justify-end'>
                                 <Link
-                                    href={`/${locale}/auth/forgot-password`}
+                                    href='/auth/forgot-password'
                                     className='text-xs font-medium text-[#06b6f4] hover:text-blue-700 hover:underline'
                                 >
                                     {t('auth.login.forgot_password')}
@@ -92,7 +90,7 @@ const LoginScreen = () => {
                 <div className='mt-6 text-center'>
                     <p className='text-sm text-slate-500'>
                         {t('auth.login.no_account')}{' '}
-                        <Link href='/en/auth/signup' className='font-semibold text-[#06b6f4] hover:text-blue-700 hover:underline'>
+                        <Link href='/auth/signup' className='font-semibold text-[#06b6f4] hover:text-blue-700 hover:underline'>
                             {t('auth.login.sign_up')}
                         </Link>
                     </p>

@@ -1,4 +1,5 @@
 import { getUserServer } from "@/src/api/auth/server/get-user";
+import ScreenHeader from "@/src/compontents/common/layout/screen-header";
 import { redirect } from "next/navigation";
 
 export default async function Layout({
@@ -20,5 +21,9 @@ export default async function Layout({
     redirect(`/${locale}/dashboard`);
   }
 
-  return <>{children}</>;
+  return <>
+    <div className="w-full flex justify-end px-8 py-2 bg-slate-50 ">
+      <ScreenHeader />
+    </div>
+    {children}</>;
 }

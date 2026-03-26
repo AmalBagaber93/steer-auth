@@ -126,7 +126,7 @@ export const RegisterForm = () => {
               className="bg-[#06b6f4] text-white sm:px-8 px-2 h-11 sm:text-xl text-base rounded-lg font-semibold hover:bg-[#05a5dc] transition-all flex items-center justify-center gap-2 min-w-35 shadow-lg shadow-blue-200 cursor-pointer"
             >
               {t("next")}
-              <ChevronRight size={20} />
+              <ChevronRight size={20} className="rtl:rotate-180" />
             </button>
           )}
         </div>

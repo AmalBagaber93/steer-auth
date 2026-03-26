@@ -7,6 +7,10 @@ export default async function middleware(request: NextRequest) {
     const handleRouting = createMiddleware({
         locales: LOCALES,
         defaultLocale: DEFAULT_LOCALE,
+        localeDetection: true,
+        localeCookie: {
+            name: 'NEXT_LOCALE',
+        },
     });
 
     request.headers.set('accept-language', '');
