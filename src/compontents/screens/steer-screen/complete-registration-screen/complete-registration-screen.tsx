@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useProfileQuery } from '@/src/api/renter/hooks/queries/use-profile.query';
 import { useBanksQuery } from '@/src/api/common/hooks/queries/use-banks.query';
 import { Loader2 } from 'lucide-react';
-import { IProfile } from '@/src/api/renter/client/get-profile';
 import { useCompleteRegistrationMutation } from '@/src/api/auth/hooks/mutations/use-complete-registration.mutation';
 import {
     CompleteRegistrationSchema,
@@ -17,18 +16,11 @@ import {
 import BankInfo from './compontents/bank-info';
 import Documents from './compontents/documents';
 import EntityInfo from './compontents/entity-info';
+import { calcCompletionFromForm } from './compontents/calc-completion-form';
+import ProgressBar from './compontents/progress-bar';
 
 export type OpenSection = 'entity' | 'bank' | 'docs' | null;
 
-function calcCompletion(p: IProfile) {
-    const fields: (string | null | undefined | object)[] = [
-        p.name, p.phone_number, p.main_branch, p.cr_number,
-        p.tga_number, p.vat_number, p.bank, p.iban_number,
-        p.iban_letter, p.logo, p.cr_attachment, p.tga_license, p.vat_certificate,
-    ];
-    const filled = fields.filter(Boolean).length;
-    return { filled, total: fields.length, percentage: Math.round((filled / fields.length) * 100) };
-}
 
 export default function CompleteRegistrationScreen() {
     const t = useTranslations();
@@ -69,7 +61,8 @@ export default function CompleteRegistrationScreen() {
         });
     }, [profile, banksData]);
 
-    const completion = profile ? calcCompletion(profile) : { filled: 0, total: 13, percentage: 0 };
+    const watchedValues = methods.watch();
+    const completion = calcCompletionFromForm(watchedValues);
 
     const toggle = (s: Exclude<OpenSection, null>) =>
         setOpenSection((prev) => (prev === s ? null : s));
@@ -102,38 +95,13 @@ export default function CompleteRegistrationScreen() {
                     </p>
                 </div>
 
-                {/* Progress */}
-                <div className="mb-6 bg-slate-50 rounded-xl p-4">
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-700">
-                            {t('auth.complete_registration.completion')}
-                        </span>
-                        <span className="text-sm font-bold text-[#06b6f4]">
-                            {completion.percentage}%
-                        </span>
-                    </div>
-                    <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                        <div
-                            className="h-full bg-[#06b6f4] rounded-full transition-all duration-500"
-                            style={{ width: `${completion.percentage}%` }}
-                        />
-                    </div>
-                    <p className="text-xs text-slate-400 mt-2">
-                        {completion.filled} / {completion.total} {t('auth.complete_registration.fields_completed')}
-                    </p>
-                </div>
+                <ProgressBar completion={completion} />
 
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-
-
                         <EntityInfo openSection={openSection} toggle={toggle} />
-
                         <BankInfo banksData={banksData?.data} openSection={openSection} toggle={toggle} />
-
-
                         <Documents openSection={openSection} toggle={toggle} />
-
                         <button
                             type="submit"
                             disabled={isPending}
@@ -151,3 +119,5 @@ export default function CompleteRegistrationScreen() {
         </div>
     );
 }
+
+
