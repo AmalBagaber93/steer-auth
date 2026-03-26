@@ -61,13 +61,16 @@ export function SelectController<TFormValues extends FieldValues>({
           )}
 
           <Select
-            onValueChange={field.onChange}
-            value={field.value}
+            key={field.value || ''}
+            onValueChange={(val) => field.onChange(val)}
+            value={field.value ?? ""}
             disabled={disabled}
           >
             <FormControl>
-              <SelectTrigger className={cn(!!error && "border-destructive" , "rounded-md")}>
-                <SelectValue placeholder={placeholder} />
+              <SelectTrigger className={cn(!!error && "border-destructive", "rounded-md")}>
+                <SelectValue placeholder={placeholder}>
+                  {options.find((opt) => opt.value === (field.value ?? ""))?.label || undefined}
+                </SelectValue>
                 <ChevronDown className="h-4 w-4 opacity-50" />
               </SelectTrigger>
             </FormControl>

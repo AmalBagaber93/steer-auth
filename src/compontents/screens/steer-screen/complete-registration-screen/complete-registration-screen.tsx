@@ -24,8 +24,9 @@ export type OpenSection = 'entity' | 'bank' | 'docs' | null;
 
 export default function CompleteRegistrationScreen() {
     const t = useTranslations();
-    const { data: profileData, isLoading: isProfileLoading } = useProfileQuery();
     const { data: banksData, isLoading: isBanksLoading } = useBanksQuery();
+    const { data: profileData, isLoading: isProfileLoading } = useProfileQuery();
+
     const isLoading = isProfileLoading || isBanksLoading;
     const profile = profileData?.data;
 
@@ -37,17 +38,7 @@ export default function CompleteRegistrationScreen() {
             bank_id: '', iban_number: '', iban_letter: [],
             logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
         },
-    });
-
-    const { handleSubmit, setError } = methods;
-
-    const { mutate: submitRegistration, isPending } = useCompleteRegistrationMutation({ setError });
-
-    const [openSection, setOpenSection] = useState<OpenSection>('entity');
-
-    useEffect(() => {
-        if (!profile) return;
-        methods.reset({
+        values: profile ? {
             name: profile.name ?? '',
             phone_number: profile.phone_number ?? '',
             phone_country_code: profile.phone_country_code ?? 'SA',
@@ -57,9 +48,17 @@ export default function CompleteRegistrationScreen() {
             vat_number: profile.vat_number ?? '',
             bank_id: profile.bank?.id ? String(profile.bank.id) : '',
             iban_number: profile.iban_number ?? '',
-            iban_letter: profile.iban_letter ? [profile.iban_letter] : [], logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
-        });
-    }, [profile, banksData]);
+            iban_letter: profile.iban_letter ? [profile.iban_letter] : [],
+            logo: [], cr_attachment: [], tga_license: [], vat_certificate: [],
+        } : undefined,
+        resetOptions: { keepDirtyValues: true },
+    });
+
+    const { handleSubmit, setError } = methods;
+
+    const { mutate: submitRegistration, isPending } = useCompleteRegistrationMutation({ setError });
+
+    const [openSection, setOpenSection] = useState<OpenSection>('entity');
 
     const watchedValues = methods.watch();
     const completion = calcCompletionFromForm(watchedValues);
@@ -100,7 +99,7 @@ export default function CompleteRegistrationScreen() {
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                         <EntityInfo openSection={openSection} toggle={toggle} />
-                        <BankInfo banksData={banksData?.data} openSection={openSection} toggle={toggle} />
+                        <BankInfo banksData={banksData} openSection={openSection} toggle={toggle} profile={profile} />
                         <Documents openSection={openSection} toggle={toggle} />
                         <button
                             type="submit"

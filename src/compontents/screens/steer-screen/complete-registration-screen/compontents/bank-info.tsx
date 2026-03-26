@@ -6,18 +6,23 @@ import CollapsibleSection from '@/src/compontents/ui/collapsible-section'
 import { Landmark } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { OpenSection } from '../complete-registration-screen'
+import { IProfile } from '@/src/api/renter/client/get-profile'
 
 interface BankInfoProps {
-    banksData?: IGetBanksResponse['data'];
+    banksData?: IGetBanksResponse;
     openSection: OpenSection;
     toggle: (s: Exclude<OpenSection, null>) => void
+    profile?: IProfile
 }
 
-const BankInfo = ({ banksData, openSection, toggle }: BankInfoProps) => {
+const BankInfo = ({ banksData, openSection, toggle, profile }: BankInfoProps) => {
     const t = useTranslations();
+    const banks = banksData?.data?.map((b) => ({
+        value: String(b.id),
+        label: b.name,
+    })) ?? [];
 
-    const banks = banksData?.map((b) => ({ value: String(b.id), label: b.name })) ?? [];
-
+    console.log('banks', banks);
     return (
         <CollapsibleSection
             icon={<Landmark className="w-5 h-5 text-[#06b6f4]" />}
@@ -30,6 +35,7 @@ const BankInfo = ({ banksData, openSection, toggle }: BankInfoProps) => {
                 label={t('auth.complete_registration.fields.bank')}
                 placeholder={t('auth.complete_registration.fields.bank')}
                 options={banks}
+
             />
             <InputController
                 name="iban_number"
