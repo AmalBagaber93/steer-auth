@@ -22,7 +22,7 @@ const BankInfo = ({ banksData, openSection, toggle, profile }: BankInfoProps) =>
         label: b.name,
     })) ?? [];
 
-    console.log('banks', banks);
+
     return (
         <CollapsibleSection
             icon={<Landmark className="w-5 h-5 text-[#06b6f4]" />}
