@@ -88,34 +88,42 @@
     }
   },
   "Auth": {
+    "back": "رجوع",
     "next": "الخطوة التالية",
     "personal_info": "المعلومات الشخصية",
     "personal_info_desc": "يرجى تقديم بيانات الاتصال الشخصية الخاصة بك.",
     "first_name": {
       "label": "الاسم الأول",
-      "placeholder": "الاسم الأول"
+      "placeholder": "الاسم الأول",
+      "required": "اسم الاول مطلوب"
     },
     "last_name": {
-      "label": "اسم العائلة",
-      "placeholder": "اسم العائلة"
+      "label": "الاسم العائلة",
+      "placeholder": "اسم العائلة",
+      "required": "اسم الاخير مطلوب"
     },
     "email": {
       "label": "البريد الإلكتروني",
+      "required": " الايميل مطلوب",
       "placeholder": "mohammed@example.com"
     },
     "phone_number": {
-      "label": "رقم الهاتف",
-      "placeholder": "55555555"
+      "label": "رقم الجوال",
+      "placeholder": "55555555",
+      "required": " رقم الجوال مطلوب",
+      "len": "رقم الجوال يجب أن يحتوي على 10 رقم"
     },
     "company_info": "معلومات الشركة",
     "company_info_desc": "أدخل معلومات السجل التجاري لشركتك.",
     "company_name": {
       "label": "اسم الشركة",
-      "placeholder": "شركتي"
+      "placeholder": "شركتي",
+      "required": " اسم الشركة مطلوب"
     },
     "main_branch": {
       "label": "الفرع الرئيسي",
-      "placeholder": "الرياض"
+      "placeholder": "الرياض",
+      "required": " الفرع الرئيسي مطلوب"
     },
     "cr_number": {
       "label": "رقم السجل التجاري",
@@ -144,6 +152,7 @@
     "iban_number": {
       "label": "رقم الآيبان",
       "placeholder": "CA...",
+      "required": " رقم الآيبان مطلوب",
       "matches": " "
     },
     "iban_letter": {

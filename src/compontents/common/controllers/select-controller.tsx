@@ -67,7 +67,7 @@ export function SelectController<TFormValues extends FieldValues>({
             disabled={disabled}
           >
             <FormControl>
-              <SelectTrigger className={cn(!!error && "border-destructive", "rounded-md")}>
+              <SelectTrigger className={cn(!!error && "border-destructive", "rounded-md rtl:flex-row-reverse")}>
                 <SelectValue placeholder={placeholder}>
                   {options.find((opt) => opt.value === (field.value ?? ""))?.label || undefined}
                 </SelectValue>

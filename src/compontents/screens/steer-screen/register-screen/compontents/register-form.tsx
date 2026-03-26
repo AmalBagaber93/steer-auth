@@ -103,7 +103,7 @@ export const RegisterForm = () => {
               "text-slate-600 hover:bg-slate-50 cursor-pointer",
             )}
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={20} className="rtl:rotate-180" />
             {t("back")}
           </button>
 

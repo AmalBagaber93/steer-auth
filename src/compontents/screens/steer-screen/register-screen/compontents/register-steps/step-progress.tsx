@@ -17,12 +17,11 @@ const StepProgress = ({ STEPS, currentStep }: StepProgressProps) => {
     return (
         <div className="mb-1 px-5">
             <div className="relative flex justify-between">
-                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
+                <div className="absolute top-1/2 inset-x-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
                 <div
-                    className="absolute top-1/2 left-0 h-0.5 bg-blue-500 -translate-y-1/2 z-0 transition-all duration-500 ease-in-out"
+                    className="absolute top-1/2 start-0 h-0.5 bg-blue-500 -translate-y-1/2 z-0 transition-all duration-500 ease-in-out"
                     style={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
                 />
-
                 {STEPS.map((step, index) => {
                     const StepIcon = step.icon;
                     const isActive = index === currentStep;

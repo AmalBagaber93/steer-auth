@@ -35,9 +35,9 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-
+  const getDir = (locale: string) => (locale === 'ar' ? 'rtl' : 'ltr');
   return (
-    <html lang={locale} dir={dir(locale)}>
+    <html lang={locale} dir={getDir(locale)}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
