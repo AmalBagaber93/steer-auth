@@ -4,8 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/src/utils/i18n/routing';
+import { useTranslations } from 'next-intl';
 import { Mail, ShieldCheck } from 'lucide-react';
 import { InputController } from '@/src/compontents/common/controllers/input-controller';
 import { useSendEmailVerificationMutation } from '@/src/api/auth/hooks/mutations/use-send-email-verification.mutation';
@@ -22,7 +22,6 @@ type EmailVerificationFormData = z.infer<
 
 export default function EmailVerificationScreen() {
   const t = useTranslations();
-  const locale = useLocale();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
 
@@ -66,7 +65,7 @@ export default function EmailVerificationScreen() {
                 {t('auth.reset_password.success_message')}
               </p>
               <Link
-                href={`/${locale}/auth/login`}
+                href='/auth/login'
                 className="w-full bg-[#06b6f4] text-white font-semibold h-10 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center"
               >
                 {t('auth.reset_password.back_to_login')}

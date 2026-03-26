@@ -2,15 +2,13 @@
 
 import Image from 'next/image';
 import { MailCheck } from 'lucide-react';
-import { useSearchParams, useParams } from 'next/navigation';
-import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { Link } from '@/src/utils/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 export default function ConfirmEmailScreen() {
     const t = useTranslations();
     const searchParams = useSearchParams();
-    const params = useParams();
-    const locale = (params?.locale as string) ?? 'en';
     const email = searchParams.get('email') ?? '';
 
     return (
@@ -48,7 +46,7 @@ export default function ConfirmEmailScreen() {
                 </p>
 
                 <Link
-                    href={`/${locale}/auth/login`}
+                    href='/auth/login'
                     className="w-full bg-[#06b6f4] text-white font-semibold h-10 rounded-lg hover:bg-[#05a5dc] transition-all flex items-center justify-center"
                 >
                     {t('auth.register.sign_in')}
